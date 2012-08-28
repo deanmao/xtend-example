@@ -6,7 +6,6 @@ global.XtndGuide = xtendme.Guide
 ExampleGuide = require('./example_guide')
 coffee = require('coffee-script')
 
-console.log('.') for i in [0..30]
 key = fs.readFileSync('./ssl/key').toString()
 cert = fs.readFileSync('./ssl/cert').toString()
 sslOptions = {key: key, cert: cert}
