@@ -12,6 +12,7 @@ coffee = require('coffee-script')
 # cert = fs.readFileSync('./ssl/cert').toString()
 # sslOptions = {key: key, cert: cert}
 
+injectjs = fs.readFileSync('inject.js').toString()
 host = 'xtendthis.com'
 guide = new ExampleGuide
   host: host
@@ -31,7 +32,7 @@ configureServer = (server, guide, scripts, protocol) ->
     name = req.params.name
     if name == 'inject.js'
       res.setHeader('Content-Type', 'text/javascript; charset=UTF-8')
-      res.send('')
+      res.send(injectjs)
 
   return server
 
