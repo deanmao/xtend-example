@@ -12,10 +12,24 @@ Forward port 80 & 443 to 8080/8443 with iptables:
     iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
     iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 443 -j REDIRECT --to-port 8443
 
-Clone this repo and run it:
+Clone this repo and make some brief modifications:
 
     git clone http://github.com/deanmao/xtend-example
     cd xtend-example
+    vim app.coffee
+
+Inside app.coffee, you'll have to tweak it so that it uses your root domain.
+
+Change this line:
+
+    host = 'xtendthis.com'
+
+Into this line:
+
+    host = 'your-domain-that-you-bought.com'
+
+Then run it:
+
     npm install
     cake run
 
