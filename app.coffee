@@ -6,9 +6,12 @@ global.XtndGuide = xtendme.Guide
 ExampleGuide = require('./example_guide')
 coffee = require('coffee-script')
 
-key = fs.readFileSync('./ssl/key').toString()
-cert = fs.readFileSync('./ssl/cert').toString()
-sslOptions = {key: key, cert: cert}
+# --- Uncomment out the ssl parts if you add ssl support
+#
+# key = fs.readFileSync('./ssl/key').toString()
+# cert = fs.readFileSync('./ssl/cert').toString()
+# sslOptions = {key: key, cert: cert}
+
 host = 'xtendthis.com'
 guide = new ExampleGuide
   host: host
@@ -34,6 +37,7 @@ configureServer = (server, guide, scripts, protocol) ->
 
 xtendme.generateScripts __dirname + '/example_guide.coffee', {host: host}, (scripts) ->
   http = express.createServer()
-  https = express.createServer(sslOptions)
   configureServer(http, guide, scripts, 'http').listen(8080)
-  configureServer(https, guide, scripts, 'https').listen(8443)
+#  --- More SSL stuff here:
+#  https = express.createServer(sslOptions)
+#  configureServer(https, guide, scripts, 'https').listen(8443)
