@@ -19,3 +19,7 @@ Clone this repo and run it:
     npm install
     cake run
 
+Disclaimer: I'm using iptables here, but if you were to implement this on
+a production server, you may choose to use something more scalable like
+haproxy or nginx.  I'm only using iptables as example for demonstration
+purposes.
