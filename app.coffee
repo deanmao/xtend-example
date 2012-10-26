@@ -8,14 +8,15 @@ coffee = require('coffee-script')
 
 # --- Uncomment out the ssl parts if you add ssl support
 #
-# key = fs.readFileSync('./ssl/key').toString()
-# cert = fs.readFileSync('./ssl/cert').toString()
-# sslOptions = {key: key, cert: cert}
+key = fs.readFileSync('./ssl/key').toString()
+cert = fs.readFileSync('./ssl/cert').toString()
+sslOptions = {key: key, cert: cert}
 
 injectjs = fs.readFileSync('inject.js').toString()
-host = 'xtendthis.com'
+host = 'xtend.dev'
 guide = new ExampleGuide
   host: host
+  htmlparser: require('node-hubbub')
   fs: fs
   p: () -> inspect(arguments...)
 
@@ -39,6 +40,5 @@ configureServer = (server, guide, scripts, protocol) ->
 xtendme.generateScripts __dirname + '/example_guide.coffee', {host: host}, (scripts) ->
   http = express.createServer()
   configureServer(http, guide, scripts, 'http').listen(8080)
-#  --- More SSL stuff here:
-#  https = express.createServer(sslOptions)
-#  configureServer(https, guide, scripts, 'https').listen(8443)
+  https = express.createServer(sslOptions)
+  configureServer(https, guide, scripts, 'https').listen(8443)

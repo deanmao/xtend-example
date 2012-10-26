@@ -20,5 +20,5 @@ start = (file) ->
 
 task 'run', 'Run server', ->
   start('app.coffee')
-  watch 'lib', (event, file) ->
+  watch 'app.coffee', (event, file) ->
     start('app.coffee')
