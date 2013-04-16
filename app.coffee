@@ -17,6 +17,8 @@ guide = new ExampleGuide
   fs: fs
   p: () -> inspect(arguments...)
   htmlparser: require('node-hubbub')
+  LOCAL_SUBDOMAINS:
+    www: true
 
 configureServer = (server, guide, scripts, protocol) ->
   server.configure 'development', ->
@@ -32,6 +34,9 @@ configureServer = (server, guide, scripts, protocol) ->
     if name == 'inject.js'
       res.setHeader('Content-Type', 'text/javascript; charset=UTF-8')
       res.send(injectjs)
+
+  server.get "/:name", (req, res) ->
+    res.send('hello')
 
   return server
 
